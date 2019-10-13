@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_book_app/screens/signup_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  static final String id = 'login_screen';
+class SignupScreen extends StatefulWidget {
+  static final String id = 'signup_screen';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
-  String _email, _password;
+  String _name, _email, _password;
 
   // _LoginScreenState(this._email, this._password);
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+      print(_name);
       print(_email);
       print(_password);
     }
@@ -39,6 +39,19 @@ class _LoginScreenState extends State<LoginScreen> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                      vertical: 20.0,
+                    ),
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: 'Name'),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Please enter a valid name'
+                          : null,
+                      onSaved: (input) => _name = input,
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 40.0,
@@ -78,10 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20.0,
                   ),
                   FlatButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, SignupScreen.id),
+                    onPressed: () => Navigator.pop(context),
                     color: Colors.amberAccent,
-                    child: Text('Signup'),
+                    child: Text('Back to login'),
                   )
                 ],
               ),
