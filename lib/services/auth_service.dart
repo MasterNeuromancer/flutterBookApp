@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_book_app/screens/feed_screen.dart';
-import 'package:flutter_book_app/screens/login_screen.dart';
+import 'package:flutter_book_app/screens/home_screen.dart';
+//  import 'package:flutter_book_app/screens/login_screen.dart';
 
 class AuthService {
   static final _auth = FirebaseAuth.instance;
@@ -20,19 +20,22 @@ class AuthService {
           'email': email,
           'imageUrl': '',
         });
-        Navigator.pushReplacementNamed(context, FeedScreen.id);
+        Navigator.pushReplacementNamed(context, HomeScreen.id);
       }
     } catch (e) {
       print(e);
     }
   }
 
-  static void logout(BuildContext context) {
+  static void logout() {
     _auth.signOut();
-    Navigator.pushReplacementNamed(context, LoginScreen.id);
   }
 
   static void login(String email, String password) async {
-    _auth.signInWithEmailAndPassword(email: email, password: password);
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      print(e);
+    }
   }
 }
