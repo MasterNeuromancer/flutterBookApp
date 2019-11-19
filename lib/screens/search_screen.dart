@@ -10,7 +10,12 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Search'),
+        child: Column(
+          children: <Widget>[
+            //Todo: Create better UI for the search feature. Must access database correctly.
+            Text('Search for a User/Post')
+          ],
+        ),
       ),
     );
   }
